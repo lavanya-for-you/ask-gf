@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will you be my girlfriend?</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #a18cd1, #fbc2eb);
+      color: #222;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 30px 40px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      max-width: 400px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .options {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .option-label {
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: #ff5ea0;
+    }
+
+    #message {
+      font-size: 1rem;
+      margin-top: 10px;
+      min-height: 24px;
+      font-weight: bold;
+    }
+
+    .yes-text {
+      color: #1f9d55;
+    }
+
+    .no-text {
+      color: #e53e3e;
+    }
+
+    .heart-row {
+      margin-top: 10px;
+      font-size: 1.3rem;
+    }
+
+    .rainbow {
+      background-image: linear-gradient(90deg, #ff0000, #ff7a00, #ffeb00, #00c200, #0094ff, #7b00ff, #ff00c8);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="rainbow">Will you be my girlfriend?</h1>
+    <div class="subtitle">Love is love 🌈</div>
+
+    <div class="options">
+      <label class="option-label">
+        <input type="checkbox" id="yesBox">
+        Yes
+      </label>
+      <label class="option-label">
+        <input type="checkbox" id="noBox">
+        No
+      </label>
+    </div>
+
+    <div id="message"></div>
+    <div class="heart-row">💖 🧡 💛 💚 💙 💜</div>
+  </div>
+
+  <script>
+    const yesBox = document.getElementById('yesBox');
+    const noBox = document.getElementById('noBox');
+    const message = document.getElementById('message');
+
+    function updateMessage() {
+      if (yesBox.checked && !noBox.checked) {
+        message.textContent = "Congratulations! You picked the right answer 💕";
+        message.className = "yes-text";
+      } else if (!yesBox.checked && noBox.checked) {
+        message.textContent = "Wrong answer… try again later 😉";
+        message.className = "no-text";
+      } else if (!yesBox.checked && !noBox.checked) {
+        message.textContent = "";
+        message.className = "";
+      } else {
+        // both checked – gently nudge them
+        message.textContent = "You can only pick one, cutie 💗";
+        message.className = "no-text";
+      }
+    }
+
+    yesBox.addEventListener('change', () => {
+      if (yesBox.checked) {
+        noBox.checked = false; // only one at a time
+      }
+      updateMessage();
+    });
+
+    noBox.addEventListener('change', () => {
+      if (noBox.checked) {
+        yesBox.checked = false; // only one at a time
+      }
+      updateMessage();
+    });
+  </script>
+</body>
+</html>
